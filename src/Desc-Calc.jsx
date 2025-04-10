@@ -20,27 +20,30 @@ export default function DescCalc() {
         }
     };
 
-    const updateAmount = (id, value) => {
-        if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
-            setLineItems(lineItems.map(item =>
-                item.id === id ? { ...item, amount: value } : item
-            ));
-        }
-    };
+    // const updateAmount = (id, value) => {
+    //     if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
+    //         setLineItems(lineItems.map(item =>
+    //             item.id === id ? { ...item, amount: value } : item
+    //         ));
+    //     }
+    // };
 
-    const updateQuantity = (id, value) => {
-        if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
-            setLineItems(lineItems.map(item =>
-                item.id === id ? { ...item, quantity: value } : item
-            ));
-        }
-    };
+    // const updateQuantity = (id, value) => {
+    //     if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
+    //         setLineItems(lineItems.map(item =>
+    //             item.id === id ? { ...item, quantity: value } : item
+    //         ));
+    //     }
+    // };
 
-    const calculateTotal = (amount, quantity) => {
-        const amountNum = amount === '' ? 0 : Number(amount);
-        const quantityNum = quantity === '' ? 0 : Number(quantity);
-        return (amountNum * quantityNum).toFixed(2);
-    };
+    // const calculateTotal = (amount, quantity) => {
+    //     const amountNum = amount === '' ? 0 : Number(amount);
+    //     const quantityNum = quantity === '' ? 0 : Number(quantity);
+    //     return (amountNum * quantityNum).toFixed(2);
+    // };
+
+    const [amount, setAmount] = useState(0);
+    const [quantity, setQuantity] = useState(1);
 
     return (
         <div className="flex flex-col gap-2">
@@ -52,7 +55,7 @@ export default function DescCalc() {
                                 <div className="flex items-center gap-1">
                                     <div className="text-gray-500">Amount:</div>
                                     <div className="text-gray-600">
-                                        {`US$${calculateTotal(item.amount, item.quantity)}`}
+                                        {`US$${((amount === '' ? 0 : Number(amount)) * (quantity === '' ? 0 : Number(quantity))).toFixed(2)}`}
                                     </div>
                                 </div>
                                 <FaXmark
@@ -66,8 +69,13 @@ export default function DescCalc() {
                                         <BsCurrencyDollar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-[.85rem] font-bold text-gray-500 z-10" />
                                         <input
                                             type="text"
-                                            value={item.amount}
-                                            onChange={(e) => updateAmount(item.id, e.target.value)}
+                                            value={amount.toString()}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
+                                                  setAmount(value === '' ? '' : value);
+                                                }
+                                              }}
                                             className="pl-7 pr-5 h-9 w-30 border text-gray-800 border-gray-300 rounded-md text-[12px] focus:shadow-[0px_0px_3px_3px_#eee] outline-none"
                                         />
                                     </div>
@@ -75,8 +83,13 @@ export default function DescCalc() {
                                     <div className="">
                                         <input
                                             type="text"
-                                            value={item.quantity}
-                                            onChange={(e) => updateQuantity(item.id, e.target.value)}
+                                            value={quantity.toString()}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
+                                                  setQuantity(value === '' ? '' : value);
+                                                }
+                                              }}
                                             className="pl-4 pr-4 h-9 w-22 border max-sm:text-left md:text-right text-gray-800 border-gray-300 rounded-md text-[12px] focus:shadow-[0px_0px_3px_3px_#eee] outline-none"
                                         />
                                     </div>
