@@ -101,11 +101,19 @@ const CustomDate = () => {
     };
   }, [wrapperRef]);
   
+
+
+
+
+
+
+
+
   return (
     <div className="relative w-fit" ref={wrapperRef}>
       <input
         type="text"
-        className="w-41 h-10 px-4 border text-[.75rem] text-gray-900 text-right border-gray-300 rounded focus:outline-none"
+        className="w-35 h-9 px-4 border text-[.75rem] text-gray-900 text-right border-gray-300 rounded focus:outline-none"
         value={formatDate(selectedDate)}
         onClick={() => setShowCalendar(!showCalendar)}
         readOnly
@@ -114,9 +122,9 @@ const CustomDate = () => {
       {showCalendar && (
         <div className="absolute left-2 p-2 text-[.75rem] top-10 w-60 bg-white border border-gray-300 rounded shadow-lg z-10">
           {/* Month and Year selectors */}
-          <div className="flex justify-between items-center p-2 border-b">
+          <div className="flex justify-between items-center p-2 border-b border-b-gray-500">
             <button 
-              className="text-gray-600 hover:bg-gray-100 rounded-full w-6 h-6 flex items-center justify-center"
+              className="text-gray-600 hover:bg-gray-200 p-[14px] rounded-full w-6 h-6 flex items-center justify-center"
               onClick={() => navigateMonth('prev')}
             >
               &#9664;
@@ -145,7 +153,7 @@ const CustomDate = () => {
             </div>
             
             <button 
-              className="text-gray-600 hover:bg-gray-100 rounded-full w-6 h-6 flex items-center justify-center"
+              className="text-gray-600 hover:bg-gray-200 p-[14px] rounded-full w-6 h-6 flex items-center justify-center"
               onClick={() => navigateMonth('next')}
             >
               &#9654;
@@ -153,7 +161,7 @@ const CustomDate = () => {
           </div>
           
           {/* Calendar weekday headers */}
-          <div className="grid grid-cols-7 text-center text-[.75rem] border-b">
+          <div className="grid grid-cols-7 text-center text-[.75rem] border-b border-b-gray-500">
             {days.map(day => (
               <div key={day} className="py-1">{day}</div>
             ))}
@@ -166,7 +174,7 @@ const CustomDate = () => {
                 key={index} 
                 className={`
                   py-1 border border-gray-100 cursor-pointer
-                  ${day ? 'hover:bg-gray-100' : ''}
+                  ${day ? 'hover:bg-gray-200' : ''}
                   ${isToday(day) ? 'bg-yellow-200' : ''}
                 `}
                 onClick={() => handleDateSelect(day)}

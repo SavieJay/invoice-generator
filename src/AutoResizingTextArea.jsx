@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const AutoResizingTextarea = ({ placeholder, wid }) => {
+const AutoResizingTextarea = ({ placeholder, wid, midWid, height }) => {
   const [value, setValue] = useState('');
   const textareaRef = useRef(null);
   
@@ -9,6 +9,8 @@ const AutoResizingTextarea = ({ placeholder, wid }) => {
     if (!textarea) return;
 
     textarea.classList.add(wid);
+    textarea.classList.add(midWid);
+    textarea.classList.add(height);
   
     textarea.style.height = '15px';
     
@@ -16,7 +18,7 @@ const AutoResizingTextarea = ({ placeholder, wid }) => {
     textarea.style.height = `${scrollHeight}px`;
     
     console.log('Content height:', scrollHeight);
-  }, [value, wid]);
+  }, [height, midWid, value, wid]);
   
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -29,7 +31,7 @@ const AutoResizingTextarea = ({ placeholder, wid }) => {
         value={value}
         onChange={handleChange}
         className="
-           py-3 px-4 min-h-[60px] text-[.75rem] border border-gray-300 rounded-sm focus:outline-none focus:ring-0 
+           py-3 px-4 text-[.75rem] border border-gray-300 rounded-sm focus:outline-none focus:ring-0 
           focus:border-gray-300 focus:shadow-[0px_0px_3px_3px_#eee] resize-none overflow-hidden"
         placeholder={placeholder}
       />
